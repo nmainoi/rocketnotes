@@ -16,6 +16,7 @@ body * {
     font-family: 'Roboto Slab', serif;
     font-size: 16px;
     outline: none;
+    -webkit-font-smoothing: antialiased;
 }
 
 a{
