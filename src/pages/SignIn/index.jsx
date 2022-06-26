@@ -1,5 +1,5 @@
 import { Container, Form, Background } from './style';
-
+import {Link} from 'react-router-dom'
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
@@ -26,7 +26,7 @@ export function SignIn() {
                     icon={FiLock}
                 />
                 <Button title='Entrar'/>
-                <a href='#'> Criar conta</a>
+                <Link to="/register"> Criar conta</Link>
             </Form>
             <Background/>
         </Container>
