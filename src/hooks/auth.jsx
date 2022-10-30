@@ -33,8 +33,14 @@ function AuthProvider({children})
         localStorage.removeItem('@RocketNotes:token');
         setData({});
     }
-    async function updateProfile({user}){
+    async function updateProfile({user, avatarFile}){
         try{
+            if(avatarFile){
+                const fileUpdloadFrom = new FormData();
+                fileUpdloadFrom.append('avatar', avatarFile);
+                const response = await api.patch('/users/avatar', fileUpdloadFrom);
+                user.avatar = response.data.avatar;
+            }
             await api.put('/users', user);
             localStorage.setItem('@RocketNotes:user', JSON.stringify(user));
             setData({

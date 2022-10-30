@@ -5,6 +5,8 @@ import { useAuth } from '../../hooks/auth';
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import {Link} from 'react-router-dom';
+import {api} from '../../services/api'
+import PlaceHolderAvatar from '../../assets/avatar_placeholder.svg'
 export function Profile(){
     const {user, updateProfile} = useAuth();
 
@@ -12,7 +14,10 @@ export function Profile(){
     const [email, setEmail] = useState(user.email ?? '');
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
-    const[avatar, SetAvatar] = useState(user.avatar ?? null);
+
+
+    const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : PlaceHolderAvatar;
+    const[avatar, SetAvatar] = useState(avatarUrl);
     const [avatarFile, setAvatarFile] = useState(null);
 
     async function handleAvatarChange(event){
@@ -28,7 +33,7 @@ export function Profile(){
             password: newPassword,
             old_password: oldPassword
         }
-        await updateProfile({user})
+        await updateProfile({user,avatarFile})
     }
     return (
         <Container>
